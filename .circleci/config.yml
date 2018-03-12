@@ -16,13 +16,13 @@ jobs:
           name: Run tests
           command: |
             docker-compose up -d
-            docker-compose run dockerappcircleci python test.py
+            docker-compose run dockerappcircleci_dockerapp python test.py
       - deploy:
-         name: Push application Docker image
-         command: |
-           docker login -e $DOCKER_HUB_EMAIL -u $DOCKER_HUB_USER_ID -p $DOCKER_HUB_PWD
-           docker tag dockerappcircleci_dockerapp $DOCKER_HUB_USER_ID/dockerappcircleci:$CIRCLE_SHA1
-           docker tag dockerappcircleci_dockerapp $DOCKER_HUB_USER_ID/dockerappcircleci:latest
-           docker push $DOCKER_HUB_USER_ID/dockerappcircleci:$CIRCLE_SHA1
-           docker push $DOCKER_HUB_USER_ID/dockerappcircleci:latest
+          name: Push application Docker image
+          command: |
+            docker login -e $DOCKER_HUB_EMAIL -u $DOCKER_HUB_USER_ID -p $DOCKER_HUB_PWD
+            docker tag dockerappcircleci_dockerapp $DOCKER_HUB_USER_ID/dockerappcircleci:$CIRCLE_SHA1
+            docker tag dockerappcircleci_dockerapp $DOCKER_HUB_USER_ID/dockerappcircleci:latest
+            docker push $DOCKER_HUB_USER_ID/dockerappcircleci:$CIRCLE_SHA1
+            docker push $DOCKER_HUB_USER_ID/dockerappcircleci:latest
            
